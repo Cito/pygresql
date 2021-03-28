@@ -1,0 +1,319 @@
+
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>pg — The Classic PyGreSQL Interface &#8212; PyGreSQL 5.2.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygresql.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&display=swap" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+
+    
+    
+     
+        <script src="../../_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script src="../../_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script src="../../_static/cloud.js"></script>
+    
+
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="Introduction" href="introduction.html" />
+    <link rel="prev" title="First Steps with PyGreSQL" href="../tutorial.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+<div class="pageheader related" role="navigation" aria-label="related navigation">
+  <ul>
+    <li><a href="../../index.html">Home</a></li>
+    <li><a href="../../download/index.html">Download</a></li>
+    <li><a href="../index.html">Documentation</a></li>
+    <li><a href="../../community/index.html">Community</a></li>
+  </ul>
+  <div class="logo">
+    <a href="../../index.html">PyGreSQL</a>
+  </div>
+</div>
+
+</div>
+
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="introduction.html" title="Introduction"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="../tutorial.html" title="First Steps with PyGreSQL"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">PyGreSQL 5.2.2 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    </div>
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-pg">
+<span id="pg-the-classic-pygresql-interface"></span><h1><a class="reference internal" href="#module-pg" title="pg"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pg</span></code></a> — The Classic PyGreSQL Interface<a class="headerlink" href="#module-pg" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module.html">Module functions and constants</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module.html#connect-open-a-postgresql-connection">connect – Open a PostgreSQL connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#get-pqlib-version-get-the-version-of-libpq">get_pqlib_version – get the version of libpq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#get-set-defhost-default-server-host-dv">get/set_defhost – default server host [DV]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#get-set-defport-default-server-port-dv">get/set_defport – default server port [DV]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#get-set-defopt-default-connection-options-dv">get/set_defopt –  default connection options [DV]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#get-set-defbase-default-database-name-dv">get/set_defbase – default database name [DV]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#get-set-defuser-default-database-user-dv">get/set_defuser – default database user [DV]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#get-set-defpasswd-default-database-password-dv">get/set_defpasswd – default database password [DV]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#escape-string-escape-a-string-for-use-within-sql">escape_string – escape a string for use within SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#escape-bytea-escape-binary-data-for-use-within-sql">escape_bytea – escape binary data for use within SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#unescape-bytea-unescape-data-that-has-been-retrieved-as-text">unescape_bytea – unescape data that has been retrieved as text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#get-set-decimal-decimal-type-to-be-used-for-numeric-values">get/set_decimal – decimal type to be used for numeric values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#get-set-decimal-point-decimal-mark-used-for-monetary-values">get/set_decimal_point – decimal mark used for monetary values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#get-set-bool-whether-boolean-values-are-returned-as-bool-objects">get/set_bool – whether boolean values are returned as bool objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#get-set-array-whether-arrays-are-returned-as-list-objects">get/set_array – whether arrays are returned as list objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#get-set-bytea-escaped-whether-bytea-data-is-returned-escaped">get/set_bytea_escaped – whether bytea data is returned escaped</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#get-set-jsondecode-decoding-json-format">get/set_jsondecode – decoding JSON format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#get-set-datestyle-assume-a-fixed-date-style">get/set_datestyle – assume a fixed date style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#get-set-typecast-custom-typecasting">get/set_typecast – custom typecasting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#cast-array-record-fast-parsers-for-arrays-and-records">cast_array/record – fast parsers for arrays and records</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#type-helpers">Type helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#module-constants">Module constants</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="connection.html">Connection – The connection object</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#query-execute-a-sql-command-string">query – execute a SQL command string</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#send-query-executes-a-sql-command-string-asynchronously">send_query - executes a SQL command string asynchronously</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#query-prepared-execute-a-prepared-statement">query_prepared – execute a prepared statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#prepare-create-a-prepared-statement">prepare – create a prepared statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#describe-prepared-describe-a-prepared-statement">describe_prepared – describe a prepared statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#reset-reset-the-connection">reset – reset the connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#poll-completes-an-asynchronous-connection">poll - completes an asynchronous connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#cancel-abandon-processing-of-current-sql-command">cancel – abandon processing of current SQL command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#close-close-the-database-connection">close – close the database connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#transaction-get-the-current-transaction-state">transaction – get the current transaction state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#parameter-get-a-current-server-parameter-setting">parameter – get a current server parameter setting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#date-format-get-the-currently-used-date-format">date_format – get the currently used date format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#fileno-get-the-socket-used-to-connect-to-the-database">fileno – get the socket used to connect to the database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#set-non-blocking-set-the-non-blocking-status-of-the-connection">set_non_blocking - set the non-blocking status of the connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#is-non-blocking-report-the-blocking-status-of-the-connection">is_non_blocking - report the blocking status of the connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#getnotify-get-the-last-notify-from-the-server">getnotify – get the last notify from the server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#inserttable-insert-a-list-into-a-table">inserttable – insert a list into a table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#get-set-cast-hook-fallback-typecast-function">get/set_cast_hook – fallback typecast function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#get-set-notice-receiver-custom-notice-receiver">get/set_notice_receiver – custom notice receiver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#putline-write-a-line-to-the-server-socket-da">putline – write a line to the server socket [DA]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#getline-get-a-line-from-server-socket-da">getline – get a line from server socket [DA]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#endcopy-synchronize-client-and-server-da">endcopy – synchronize client and server [DA]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#locreate-create-a-large-object-in-the-database-lo">locreate – create a large object in the database [LO]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#getlo-build-a-large-object-from-given-oid-lo">getlo – build a large object from given oid [LO]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#loimport-import-a-file-to-a-large-object-lo">loimport – import a file to a large object [LO]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#object-attributes">Object attributes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="db_wrapper.html">The DB wrapper class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#initialization">Initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#pkey-return-the-primary-key-of-a-table">pkey – return the primary key of a table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#get-databases-get-list-of-databases-in-the-system">get_databases – get list of databases in the system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#get-relations-get-list-of-relations-in-connected-database">get_relations – get list of relations in connected database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#get-tables-get-list-of-tables-in-connected-database">get_tables – get list of tables in connected database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#get-attnames-get-the-attribute-names-of-a-table">get_attnames – get the attribute names of a table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#has-table-privilege-check-table-privilege">has_table_privilege – check table privilege</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#get-set-parameter-get-or-set-run-time-parameters">get/set_parameter – get or set  run-time parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#begin-commit-rollback-savepoint-release-transaction-handling">begin/commit/rollback/savepoint/release – transaction handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#get-get-a-row-from-a-database-table-or-view">get – get a row from a database table or view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#insert-insert-a-row-into-a-database-table">insert – insert a row into a database table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#update-update-a-row-in-a-database-table">update – update a row in a database table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#upsert-insert-a-row-with-conflict-resolution">upsert – insert a row with conflict resolution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#query-execute-a-sql-command-string">query – execute a SQL command string</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#query-formatted-execute-a-formatted-sql-command-string">query_formatted – execute a formatted SQL command string</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#query-prepared-execute-a-prepared-statement">query_prepared – execute a prepared statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#prepare-create-a-prepared-statement">prepare – create a prepared statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#describe-prepared-describe-a-prepared-statement">describe_prepared – describe a prepared statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#delete-prepared-delete-a-prepared-statement">delete_prepared – delete a prepared statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#clear-clear-row-values-in-memory">clear – clear row values in memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#delete-delete-a-row-from-a-database-table">delete – delete a row from a database table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#truncate-quickly-empty-database-tables">truncate – quickly empty database tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#get-as-list-dict-read-a-table-as-a-list-or-dictionary">get_as_list/dict – read a table as a list or dictionary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#escape-literal-identifier-string-bytea-escape-for-sql">escape_literal/identifier/string/bytea – escape for SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#unescape-bytea-unescape-data-retrieved-from-the-database">unescape_bytea – unescape data retrieved from the database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#encode-decode-json-encode-and-decode-json-data">encode/decode_json – encode and decode JSON data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#use-regtypes-choose-usage-of-registered-type-names">use_regtypes – choose usage of registered type names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#notification-handler-create-a-notification-handler">notification_handler – create a notification handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_wrapper.html#attributes-of-the-db-wrapper-class">Attributes of the DB wrapper class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="query.html">Query methods</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="query.html#getresult-get-query-values-as-list-of-tuples">getresult – get query values as list of tuples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query.html#dictresult-dictiter-get-query-values-as-dictionaries">dictresult/dictiter – get query values as dictionaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query.html#namedresult-namediter-get-query-values-as-named-tuples">namedresult/namediter – get query values as named tuples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query.html#scalarresult-scalariter-get-query-values-as-scalars">scalarresult/scalariter – get query values as scalars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query.html#one-onedict-onenamed-onescalar-get-one-result-of-a-query">one/onedict/onenamed/onescalar – get one result of a query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query.html#single-singledict-singlenamed-singlescalar-get-single-result-of-a-query">single/singledict/singlenamed/singlescalar – get single result of a query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query.html#listfields-list-field-names-of-query-result">listfields – list field names of query result</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query.html#fieldname-fieldnum-field-name-number-conversion">fieldname, fieldnum – field name/number conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query.html#fieldinfo-detailed-info-about-query-result-fields">fieldinfo – detailed info about query result fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query.html#ntuples-return-number-of-tuples-in-query-object">ntuples – return number of tuples in query object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query.html#memsize-return-number-of-bytes-allocated-by-query-result">memsize – return number of bytes allocated by query result</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="large_objects.html">LargeObject – Large Objects</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="large_objects.html#open-open-a-large-object">open – open a large object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="large_objects.html#close-close-a-large-object">close – close a large object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="large_objects.html#read-write-tell-seek-unlink-file-like-large-object-handling">read, write, tell, seek, unlink – file-like large object handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="large_objects.html#size-get-the-large-object-size">size – get the large object size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="large_objects.html#export-save-a-large-object-to-a-file">export – save a large object to a file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="large_objects.html#object-attributes">Object attributes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notification.html">The Notification Handler</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#instantiating-the-notification-handler">Instantiating the notification handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#invoking-the-notification-handler">Invoking the notification handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#sending-notifications">Sending notifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#auxiliary-methods">Auxiliary methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="db_types.html">DbTypes – The internal cache for database types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adaptation.html">Remarks on Adaptation and Typecasting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="adaptation.html#supported-data-types">Supported data types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adaptation.html#adaptation-of-parameters">Adaptation of parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adaptation.html#typecasting-to-python">Typecasting to Python</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="../index.html" title="contents/index">
+          <img class="logo" src="../../_static/pygresql.png" alt="Logo"/>
+        </a></p><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="../index.html">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pg</span></code> — The Classic PyGreSQL Interface</a><ul>
+<li><a class="reference internal" href="#contents">Contents</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="../tutorial.html"
+                          title="Previous page">&larr; First Steps with PyGreSQL</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="introduction.html"
+                          title="Next page">&rarr; Introduction</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/contents/pg/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="introduction.html" title="Introduction"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="../tutorial.html" title="First Steps with PyGreSQL"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">PyGreSQL 5.2.2 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; <a href="../../copyright.html">Copyright</a> 2020, The PyGreSQL team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>

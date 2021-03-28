@@ -1,0 +1,831 @@
+
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Query methods &#8212; PyGreSQL 5.2.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygresql.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&display=swap" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+
+    
+    
+     
+        <script src="../../_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script src="../../_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script src="../../_static/cloud.js"></script>
+    
+
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="LargeObject – Large Objects" href="large_objects.html" />
+    <link rel="prev" title="The DB wrapper class" href="db_wrapper.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+<div class="pageheader related" role="navigation" aria-label="related navigation">
+  <ul>
+    <li><a href="../../index.html">Home</a></li>
+    <li><a href="../../download/index.html">Download</a></li>
+    <li><a href="../index.html">Documentation</a></li>
+    <li><a href="../../community/index.html">Community</a></li>
+  </ul>
+  <div class="logo">
+    <a href="../../index.html">PyGreSQL</a>
+  </div>
+</div>
+
+</div>
+
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="large_objects.html" title="LargeObject – Large Objects"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="db_wrapper.html" title="The DB wrapper class"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">PyGreSQL 5.2.2 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pg</span></code> — The Classic PyGreSQL Interface</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="query-methods">
+<h1>Query methods<a class="headerlink" href="#query-methods" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pg.Query">
+<em class="property">class </em><code class="sig-prename descclassname">pg.</code><code class="sig-name descname">Query</code><a class="headerlink" href="#pg.Query" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>The <a class="reference internal" href="#pg.Query" title="pg.Query"><code class="xref py py-class docutils literal notranslate"><span class="pre">Query</span></code></a> object returned by <a class="reference internal" href="connection.html#pg.Connection.query" title="pg.Connection.query"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Connection.query()</span></code></a> and
+<a class="reference internal" href="db_wrapper.html#pg.DB.query" title="pg.DB.query"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DB.query()</span></code></a> can be used as an iterable returning rows as tuples.
+You can also directly access row tuples using their index, and get
+the number of rows with the <code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code> function.
+The <a class="reference internal" href="#pg.Query" title="pg.Query"><code class="xref py py-class docutils literal notranslate"><span class="pre">Query</span></code></a> class also provides the following methods for accessing
+the results of the query:</p>
+<div class="section" id="getresult-get-query-values-as-list-of-tuples">
+<h2>getresult – get query values as list of tuples<a class="headerlink" href="#getresult-get-query-values-as-list-of-tuples" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="pg.Query.getresult">
+<code class="sig-prename descclassname">Query.</code><code class="sig-name descname">getresult</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pg.Query.getresult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get query values as list of tuples</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>result values as a list of tuples</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – too many (any) parameters</p></li>
+<li><p><strong>MemoryError</strong> – internal memory error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>This method returns query results as a list of tuples.
+More information about this result may be accessed using
+<a class="reference internal" href="#pg.Query.listfields" title="pg.Query.listfields"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Query.listfields()</span></code></a>, <a class="reference internal" href="#pg.Query.fieldname" title="pg.Query.fieldname"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Query.fieldname()</span></code></a>
+and <a class="reference internal" href="#pg.Query.fieldnum" title="pg.Query.fieldnum"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Query.fieldnum()</span></code></a> methods.</p>
+<p>Note that since PyGreSQL 5.0 this method will return the values of array
+type columns as Python lists.</p>
+<p>Since PyGreSQL 5.1 the <a class="reference internal" href="#pg.Query" title="pg.Query"><code class="xref py py-class docutils literal notranslate"><span class="pre">Query</span></code></a> can be also used directly as
+an iterable sequence, i.e. you can iterate over the <a class="reference internal" href="#pg.Query" title="pg.Query"><code class="xref py py-class docutils literal notranslate"><span class="pre">Query</span></code></a>
+object to get the same tuples as returned by <a class="reference internal" href="#pg.Query.getresult" title="pg.Query.getresult"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Query.getresult()</span></code></a>.
+This is slightly more efficient than getting the full list of results,
+but note that the full result is always fetched from the server anyway
+when the query is executed.</p>
+<p>You can also call <code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code> on a query to find the number of rows
+in the result, and access row tuples using their index directly on
+the <a class="reference internal" href="#pg.Query" title="pg.Query"><code class="xref py py-class docutils literal notranslate"><span class="pre">Query</span></code></a> object.</p>
+<p>When the <a class="reference internal" href="#pg.Query" title="pg.Query"><code class="xref py py-class docutils literal notranslate"><span class="pre">Query</span></code></a> object was returned by <a class="reference internal" href="connection.html#pg.Connection.send_query" title="pg.Connection.send_query"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Connection.send_query()</span></code></a>,
+other return values are also possible, as documented there.</p>
+</div>
+<div class="section" id="dictresult-dictiter-get-query-values-as-dictionaries">
+<h2>dictresult/dictiter – get query values as dictionaries<a class="headerlink" href="#dictresult-dictiter-get-query-values-as-dictionaries" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="pg.Query.dictresult">
+<code class="sig-prename descclassname">Query.</code><code class="sig-name descname">dictresult</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pg.Query.dictresult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get query values as list of dictionaries</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>result values as a list of dictionaries</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – too many (any) parameters</p></li>
+<li><p><strong>MemoryError</strong> – internal memory error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>This method returns query results as a list of dictionaries which have
+the field names as keys.</p>
+<p>If the query has duplicate field names, you will get the value for the
+field with the highest index in the query.</p>
+<p>Note that since PyGreSQL 5.0 this method will return the values of array
+type columns as Python lists.</p>
+<dl class="method">
+<dt id="pg.Query.dictiter">
+<code class="sig-prename descclassname">Query.</code><code class="sig-name descname">dictiter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pg.Query.dictiter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get query values as iterable of dictionaries</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>result values as an iterable of dictionaries</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>iterable</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – too many (any) parameters</p></li>
+<li><p><strong>MemoryError</strong> – internal memory error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>This method returns query results as an iterable of dictionaries which have
+the field names as keys. This is slightly more efficient than getting the full
+list of results as dictionaries, but note that the full result is always
+fetched from the server anyway when the query is executed.</p>
+<p>If the query has duplicate field names, you will get the value for the
+field with the highest index in the query.</p>
+<p>When the <a class="reference internal" href="#pg.Query" title="pg.Query"><code class="xref py py-class docutils literal notranslate"><span class="pre">Query</span></code></a> object was returned by <a class="reference internal" href="connection.html#pg.Connection.send_query" title="pg.Connection.send_query"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Connection.send_query()</span></code></a>,
+other return values are also possible, as documented there.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 5.1.</span></p>
+</div>
+</div>
+<div class="section" id="namedresult-namediter-get-query-values-as-named-tuples">
+<h2>namedresult/namediter – get query values as named tuples<a class="headerlink" href="#namedresult-namediter-get-query-values-as-named-tuples" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="pg.Query.namedresult">
+<code class="sig-prename descclassname">Query.</code><code class="sig-name descname">namedresult</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pg.Query.namedresult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get query values as list of named tuples</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>result values as a list of named tuples</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – too many (any) parameters</p></li>
+<li><p><strong>TypeError</strong> – named tuples not supported</p></li>
+<li><p><strong>MemoryError</strong> – internal memory error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>This method returns query results as a list of named tuples with
+proper field names.</p>
+<p>Column names in the database that are not valid as field names for
+named tuples (particularly, names starting with an underscore) are
+automatically renamed to valid positional names.</p>
+<p>Note that since PyGreSQL 5.0 this method will return the values of array
+type columns as Python lists.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 4.1.</span></p>
+</div>
+<dl class="method">
+<dt id="pg.Query.namediter">
+<code class="sig-prename descclassname">Query.</code><code class="sig-name descname">namediter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pg.Query.namediter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get query values as iterable of named tuples</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>result values as an iterable of named tuples</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>iterable</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – too many (any) parameters</p></li>
+<li><p><strong>TypeError</strong> – named tuples not supported</p></li>
+<li><p><strong>MemoryError</strong> – internal memory error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>This method returns query results as an iterable of named tuples with
+proper field names. This is slightly more efficient than getting the full
+list of results as named tuples, but note that the full result is always
+fetched from the server anyway when the query is executed.</p>
+<p>Column names in the database that are not valid as field names for
+named tuples (particularly, names starting with an underscore) are
+automatically renamed to valid positional names.</p>
+<p>When the <a class="reference internal" href="#pg.Query" title="pg.Query"><code class="xref py py-class docutils literal notranslate"><span class="pre">Query</span></code></a> object was returned by <a class="reference internal" href="connection.html#pg.Connection.send_query" title="pg.Connection.send_query"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Connection.send_query()</span></code></a>,
+other return values are also possible, as documented there.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 5.1.</span></p>
+</div>
+</div>
+<div class="section" id="scalarresult-scalariter-get-query-values-as-scalars">
+<h2>scalarresult/scalariter – get query values as scalars<a class="headerlink" href="#scalarresult-scalariter-get-query-values-as-scalars" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="pg.Query.scalarresult">
+<code class="sig-prename descclassname">Query.</code><code class="sig-name descname">scalarresult</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pg.Query.scalarresult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get first fields from query result as list of scalar values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>first fields from result as a list of scalar values</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – too many (any) parameters</p></li>
+<li><p><strong>MemoryError</strong> – internal memory error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>This method returns the first fields from the query results as a list of
+scalar values in the order returned by the server.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 5.1.</span></p>
+</div>
+<dl class="method">
+<dt id="pg.Query.scalariter">
+<code class="sig-prename descclassname">Query.</code><code class="sig-name descname">scalariter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pg.Query.scalariter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get first fields from query result as iterable of scalar values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>first fields from result as an iterable of scalar values</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – too many (any) parameters</p></li>
+<li><p><strong>MemoryError</strong> – internal memory error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>This method returns the first fields from the query results as an iterable
+of scalar values in the order returned by the server. This is slightly more
+efficient than getting the full list of results as rows or scalar values,
+but note that the full result is always fetched from the server anyway when
+the query is executed.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 5.1.</span></p>
+</div>
+</div>
+<div class="section" id="one-onedict-onenamed-onescalar-get-one-result-of-a-query">
+<h2>one/onedict/onenamed/onescalar – get one result of a query<a class="headerlink" href="#one-onedict-onenamed-onescalar-get-one-result-of-a-query" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="pg.Query.one">
+<code class="sig-prename descclassname">Query.</code><code class="sig-name descname">one</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pg.Query.one" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get one row from the result of a query as a tuple</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>next row from the query results as a tuple of fields</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>tuple or None</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – too many (any) parameters</p></li>
+<li><p><strong>MemoryError</strong> – internal memory error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Returns only one row from the result as a tuple of fields.</p>
+<p>This method can be called multiple times to return more rows.
+It returns None if the result does not contain one more row.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 5.1.</span></p>
+</div>
+<dl class="method">
+<dt id="pg.Query.onedict">
+<code class="sig-prename descclassname">Query.</code><code class="sig-name descname">onedict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pg.Query.onedict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get one row from the result of a query as a dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>next row from the query results as a dictionary</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict or None</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – too many (any) parameters</p></li>
+<li><p><strong>MemoryError</strong> – internal memory error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Returns only one row from the result as a dictionary with the field names
+used as the keys.</p>
+<p>This method can be called multiple times to return more rows.
+It returns None if the result does not contain one more row.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 5.1.</span></p>
+</div>
+<dl class="method">
+<dt id="pg.Query.onenamed">
+<code class="sig-prename descclassname">Query.</code><code class="sig-name descname">onenamed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pg.Query.onenamed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get one row from the result of a query as named tuple</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>next row from the query results as a named tuple</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>namedtuple or None</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – too many (any) parameters</p></li>
+<li><p><strong>MemoryError</strong> – internal memory error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Returns only one row from the result as a named tuple with proper field names.</p>
+<p>Column names in the database that are not valid as field names for
+named tuples (particularly, names starting with an underscore) are
+automatically renamed to valid positional names.</p>
+<p>This method can be called multiple times to return more rows.
+It returns None if the result does not contain one more row.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 5.1.</span></p>
+</div>
+<dl class="method">
+<dt id="pg.Query.onescalar">
+<code class="sig-prename descclassname">Query.</code><code class="sig-name descname">onescalar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pg.Query.onescalar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get one row from the result of a query as scalar value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>next row from the query results as a scalar value</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>type of first field or None</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – too many (any) parameters</p></li>
+<li><p><strong>MemoryError</strong> – internal memory error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Returns the first field of the next row from the result as a scalar value.</p>
+<p>This method can be called multiple times to return more rows as scalars.
+It returns None if the result does not contain one more row.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 5.1.</span></p>
+</div>
+</div>
+<div class="section" id="single-singledict-singlenamed-singlescalar-get-single-result-of-a-query">
+<h2>single/singledict/singlenamed/singlescalar – get single result of a query<a class="headerlink" href="#single-singledict-singlenamed-singlescalar-get-single-result-of-a-query" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="pg.Query.single">
+<code class="sig-prename descclassname">Query.</code><code class="sig-name descname">single</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pg.Query.single" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get single row from the result of a query as a tuple</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>single row from the query results as a tuple of fields</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pg.InvalidResultError</strong> – result does not have exactly one row</p></li>
+<li><p><strong>TypeError</strong> – too many (any) parameters</p></li>
+<li><p><strong>MemoryError</strong> – internal memory error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Returns a single row from the result as a tuple of fields.</p>
+<p>This method returns the same single row when called multiple times.
+It raises an <code class="xref py py-exc docutils literal notranslate"><span class="pre">pg.InvalidResultError</span></code> if the result does not have exactly
+one row. More specifically, this will be of type <code class="xref py py-exc docutils literal notranslate"><span class="pre">pg.NoResultError</span></code> if it
+is empty and of type <code class="xref py py-exc docutils literal notranslate"><span class="pre">pg.MultipleResultsError</span></code> if it has multiple rows.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 5.1.</span></p>
+</div>
+<dl class="method">
+<dt id="pg.Query.singledict">
+<code class="sig-prename descclassname">Query.</code><code class="sig-name descname">singledict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pg.Query.singledict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get single row from the result of a query as a dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>single row from the query results as a dictionary</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pg.InvalidResultError</strong> – result does not have exactly one row</p></li>
+<li><p><strong>TypeError</strong> – too many (any) parameters</p></li>
+<li><p><strong>MemoryError</strong> – internal memory error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Returns a single row from the result as a dictionary with the field names
+used as the keys.</p>
+<p>This method returns the same single row when called multiple times.
+It raises an <code class="xref py py-exc docutils literal notranslate"><span class="pre">pg.InvalidResultError</span></code> if the result does not have exactly
+one row. More specifically, this will be of type <code class="xref py py-exc docutils literal notranslate"><span class="pre">pg.NoResultError</span></code> if it
+is empty and of type <code class="xref py py-exc docutils literal notranslate"><span class="pre">pg.MultipleResultsError</span></code> if it has multiple rows.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 5.1.</span></p>
+</div>
+<dl class="method">
+<dt id="pg.Query.singlenamed">
+<code class="sig-prename descclassname">Query.</code><code class="sig-name descname">singlenamed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pg.Query.singlenamed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get single row from the result of a query as named tuple</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>single row from the query results as a named tuple</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>namedtuple</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pg.InvalidResultError</strong> – result does not have exactly one row</p></li>
+<li><p><strong>TypeError</strong> – too many (any) parameters</p></li>
+<li><p><strong>MemoryError</strong> – internal memory error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Returns single row from the result as a named tuple with proper field names.</p>
+<p>Column names in the database that are not valid as field names for
+named tuples (particularly, names starting with an underscore) are
+automatically renamed to valid positional names.</p>
+<p>This method returns the same single row when called multiple times.
+It raises an <code class="xref py py-exc docutils literal notranslate"><span class="pre">pg.InvalidResultError</span></code> if the result does not have exactly
+one row. More specifically, this will be of type <code class="xref py py-exc docutils literal notranslate"><span class="pre">pg.NoResultError</span></code> if it
+is empty and of type <code class="xref py py-exc docutils literal notranslate"><span class="pre">pg.MultipleResultsError</span></code> if it has multiple rows.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 5.1.</span></p>
+</div>
+<dl class="method">
+<dt id="pg.Query.singlescalar">
+<code class="sig-prename descclassname">Query.</code><code class="sig-name descname">singlescalar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pg.Query.singlescalar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get single row from the result of a query as scalar value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>single row from the query results as a scalar value</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>type of first field</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pg.InvalidResultError</strong> – result does not have exactly one row</p></li>
+<li><p><strong>TypeError</strong> – too many (any) parameters</p></li>
+<li><p><strong>MemoryError</strong> – internal memory error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Returns the first field of a single row from the result as a scalar value.</p>
+<p>This method returns the same single row as scalar when called multiple times.
+It raises an <code class="xref py py-exc docutils literal notranslate"><span class="pre">pg.InvalidResultError</span></code> if the result does not have exactly
+one row. More specifically, this will be of type <code class="xref py py-exc docutils literal notranslate"><span class="pre">pg.NoResultError</span></code> if it
+is empty and of type <code class="xref py py-exc docutils literal notranslate"><span class="pre">pg.MultipleResultsError</span></code> if it has multiple rows.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 5.1.</span></p>
+</div>
+</div>
+<div class="section" id="listfields-list-field-names-of-query-result">
+<h2>listfields – list field names of query result<a class="headerlink" href="#listfields-list-field-names-of-query-result" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="pg.Query.listfields">
+<code class="sig-prename descclassname">Query.</code><code class="sig-name descname">listfields</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pg.Query.listfields" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field names of query result</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>field names</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>TypeError</strong> – too many parameters</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>This method returns the list of field names defined for the query result.
+The fields are in the same order as the result values.</p>
+</div>
+<div class="section" id="fieldname-fieldnum-field-name-number-conversion">
+<h2>fieldname, fieldnum – field name/number conversion<a class="headerlink" href="#fieldname-fieldnum-field-name-number-conversion" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="pg.Query.fieldname">
+<code class="sig-prename descclassname">Query.</code><code class="sig-name descname">fieldname</code><span class="sig-paren">(</span><em class="sig-param">num</em><span class="sig-paren">)</span><a class="headerlink" href="#pg.Query.fieldname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get field name from its number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>num</strong> (<em>int</em>) – field number</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>field name</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – invalid connection, bad parameter type, or too many parameters</p></li>
+<li><p><strong>ValueError</strong> – invalid field number</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>This method allows to find a field name from its rank number. It can be
+useful for displaying a result. The fields are in the same order as the
+result values.</p>
+<dl class="method">
+<dt id="pg.Query.fieldnum">
+<code class="sig-prename descclassname">Query.</code><code class="sig-name descname">fieldnum</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#pg.Query.fieldnum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get field number from its name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – field name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>field number</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – invalid connection, bad parameter type, or too many parameters</p></li>
+<li><p><strong>ValueError</strong> – unknown field name</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>This method returns a field number given its name. It can be used to
+build a function that converts result list strings to their correct
+type, using a hardcoded table definition. The number returned is the
+field rank in the query result.</p>
+</div>
+<div class="section" id="fieldinfo-detailed-info-about-query-result-fields">
+<h2>fieldinfo – detailed info about query result fields<a class="headerlink" href="#fieldinfo-detailed-info-about-query-result-fields" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="pg.Query.fieldinfo">
+<code class="sig-prename descclassname">Query.</code><code class="sig-name descname">fieldinfo</code><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param">field</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#pg.Query.fieldinfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get information on one or all fields of the query</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>field</strong> (<em>int</em><em> or </em><em>str</em>) – a column number or name (optional)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>field info tuple(s) for all fields or given field</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>IndexError</strong> – field does not exist</p></li>
+<li><p><strong>TypeError</strong> – too many parameters</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>If the <code class="docutils literal notranslate"><span class="pre">field</span></code> is specified by passing either a column number or a field
+name, a four-tuple with information for the specified field of the query
+result will be returned. If no <code class="docutils literal notranslate"><span class="pre">field</span></code> is specified, a tuple of four-tuples
+for every field of the previous query result will be returned, in the same
+order as they appear in the query result.</p>
+<p>The four-tuples contain the following information: The field name, the
+internal OID number of the field type, the size in bytes of the column or a
+negative value if it is of variable size, and a type-specific modifier value.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 5.2.</span></p>
+</div>
+</div>
+<div class="section" id="ntuples-return-number-of-tuples-in-query-object">
+<h2>ntuples – return number of tuples in query object<a class="headerlink" href="#ntuples-return-number-of-tuples-in-query-object" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="pg.Query.ntuples">
+<code class="sig-prename descclassname">Query.</code><code class="sig-name descname">ntuples</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pg.Query.ntuples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return number of tuples in query object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>number of tuples in <a class="reference internal" href="#pg.Query" title="pg.Query"><code class="xref py py-class docutils literal notranslate"><span class="pre">Query</span></code></a></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>TypeError</strong> – Too many arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>This method returns the number of tuples in the query result.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 5.1: </span>You can use the normal <code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code> function instead.</p>
+</div>
+</div>
+<div class="section" id="memsize-return-number-of-bytes-allocated-by-query-result">
+<h2>memsize – return number of bytes allocated by query result<a class="headerlink" href="#memsize-return-number-of-bytes-allocated-by-query-result" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="pg.Query.memsize">
+<code class="sig-prename descclassname">Query.</code><code class="sig-name descname">memsize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pg.Query.memsize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return number of bytes allocated by query result</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>number of bytes allocated for the query result</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>TypeError</strong> – Too many arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>This method returns the number of bytes allocated for the query result.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 5.2: </span>(needs PostgreSQL &gt;= 12)</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="../index.html" title="contents/index">
+          <img class="logo" src="../../_static/pygresql.png" alt="Logo"/>
+        </a></p><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="../index.html">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Query methods</a><ul>
+<li><a class="reference internal" href="#getresult-get-query-values-as-list-of-tuples">getresult – get query values as list of tuples</a></li>
+<li><a class="reference internal" href="#dictresult-dictiter-get-query-values-as-dictionaries">dictresult/dictiter – get query values as dictionaries</a></li>
+<li><a class="reference internal" href="#namedresult-namediter-get-query-values-as-named-tuples">namedresult/namediter – get query values as named tuples</a></li>
+<li><a class="reference internal" href="#scalarresult-scalariter-get-query-values-as-scalars">scalarresult/scalariter – get query values as scalars</a></li>
+<li><a class="reference internal" href="#one-onedict-onenamed-onescalar-get-one-result-of-a-query">one/onedict/onenamed/onescalar – get one result of a query</a></li>
+<li><a class="reference internal" href="#single-singledict-singlenamed-singlescalar-get-single-result-of-a-query">single/singledict/singlenamed/singlescalar – get single result of a query</a></li>
+<li><a class="reference internal" href="#listfields-list-field-names-of-query-result">listfields – list field names of query result</a></li>
+<li><a class="reference internal" href="#fieldname-fieldnum-field-name-number-conversion">fieldname, fieldnum – field name/number conversion</a></li>
+<li><a class="reference internal" href="#fieldinfo-detailed-info-about-query-result-fields">fieldinfo – detailed info about query result fields</a></li>
+<li><a class="reference internal" href="#ntuples-return-number-of-tuples-in-query-object">ntuples – return number of tuples in query object</a></li>
+<li><a class="reference internal" href="#memsize-return-number-of-bytes-allocated-by-query-result">memsize – return number of bytes allocated by query result</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="db_wrapper.html"
+                          title="Previous page">&larr; The DB wrapper class</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="large_objects.html"
+                          title="Next page">&rarr; LargeObject – Large Objects</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/contents/pg/query.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="large_objects.html" title="LargeObject – Large Objects"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="db_wrapper.html" title="The DB wrapper class"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">PyGreSQL 5.2.2 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">pg</span></code> — The Classic PyGreSQL Interface</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; <a href="../../copyright.html">Copyright</a> 2020, The PyGreSQL team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>
